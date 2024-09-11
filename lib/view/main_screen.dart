@@ -1,3 +1,4 @@
+import 'package:cash_list/view/routes/router.dart';
 import 'package:flutter/material.dart';
 
 class MainScreen extends StatelessWidget {
@@ -12,13 +13,17 @@ class MainScreen extends StatelessWidget {
         backgroundColor: Colors.teal,
         actions: [
           IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushNamed(context, Routering.edit);
+              },
               icon: Icon(
                 Icons.format_align_justify,
                 color: Colors.white,
               )),
           IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushNamed(context, Routering.add);
+              },
               icon: Icon(
                 Icons.add,
                 color: Colors.white,
@@ -26,7 +31,9 @@ class MainScreen extends StatelessWidget {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(context, Routering.shop);
+        },
         child: Icon(Icons.shopify),
       ),
       body: SafeArea(

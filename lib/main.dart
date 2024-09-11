@@ -1,4 +1,4 @@
-import 'package:cash_list/view/main_screen.dart';
+import 'package:cash_list/view/routes/routes_gen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -14,7 +14,7 @@ class MainApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData.from(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.teal)),
-      home: MainScreen(),
+      onGenerateRoute: RoutesGen.onGenerateRoute,
     );
   }
 }

@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
-class AddScreen extends StatelessWidget {
-  const AddScreen({super.key});
+class EditScreen extends StatelessWidget {
+  const EditScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    List<DropdownMenuEntry<String>> lista = [
+      DropdownMenuEntry(label: "0", value: "hola"),
+      DropdownMenuEntry(label: "1", value: "hola"),
+      DropdownMenuEntry(label: "2", value: "hola"),
+      DropdownMenuEntry(label: "3", value: "hola"),
+    ];
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "add",
+          "Edit",
           style: TextStyle(color: Colors.white),
         ),
         backgroundColor: Colors.teal,
@@ -20,11 +26,10 @@ class AddScreen extends StatelessWidget {
           const SizedBox(
             height: 80,
           ),
-          const TextField(
-              decoration: InputDecoration(
-            border: OutlineInputBorder(),
-            hintText: 'Nombre Producto',
-          )),
+          DropdownMenu<String>(
+            initialSelection: lista[0].label,
+            dropdownMenuEntries: lista,
+          ),
           const SizedBox(
             height: 40,
           ),
