@@ -1,17 +1,29 @@
+import 'dart:collection';
+
+import 'package:cash_list/model/product.dart';
 import 'package:flutter/material.dart';
 
-class EditScreen extends StatelessWidget {
+class EditScreen extends StatefulWidget {
   const EditScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    List<DropdownMenuEntry<String>> lista = [
-      DropdownMenuEntry(label: "0", value: "hola"),
-      DropdownMenuEntry(label: "1", value: "hola"),
-      DropdownMenuEntry(label: "2", value: "hola"),
-      DropdownMenuEntry(label: "3", value: "hola"),
-    ];
+  State<EditScreen> createState() => _EditScreenState();
+}
 
+class _EditScreenState extends State<EditScreen> {
+  final TextEditingController _priceController = TextEditingController();
+
+  Producto? selectValue;
+
+  List<Producto> menuItems = [
+    Producto(name: "Malboro", price: 25),
+    Producto(name: "Pizza", price: 10),
+    Producto(name: "Chicle", price: 12),
+    Producto(name: "Caramelos", price: 15),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -26,27 +38,40 @@ class EditScreen extends StatelessWidget {
           const SizedBox(
             height: 80,
           ),
-          DropdownMenu<String>(
-            initialSelection: lista[0].label,
-            dropdownMenuEntries: lista,
+          DropdownButton(
+            value: selectValue,
+            onChanged: (Producto? newValue) {
+              setState(() {
+                selectValue = newValue!;
+              });
+            },
+            items: menuItems.map<DropdownMenuItem<Producto>>((Producto value) {
+              return DropdownMenuItem<Producto>(
+                value: value,
+                child: Text(value.name),
+              );
+            }).toList(),
           ),
           const SizedBox(
             height: 40,
           ),
-          const TextField(
+          TextField(
+            controller: _priceController,
             decoration: InputDecoration(
                 border: OutlineInputBorder(), hintText: "Precio"),
+            keyboardType: TextInputType.number,
           ),
           const SizedBox(
             height: 200,
           ),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            child: Text("Añadir"),
-          )
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.change_circle),
+        onPressed: () {
+          print(int.parse(_priceController.text));
+          Navigator.pop(context);
+        },
       ),
     );
   }

@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-class AddScreen extends StatelessWidget {
+class AddScreen extends StatefulWidget {
   const AddScreen({super.key});
+
+  @override
+  State<AddScreen> createState() => _AddScreenState();
+}
+
+class _AddScreenState extends State<AddScreen> {
+  final TextEditingController _prodController = TextEditingController();
+  final TextEditingController _priceController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -20,28 +28,32 @@ class AddScreen extends StatelessWidget {
           const SizedBox(
             height: 80,
           ),
-          const TextField(
+          TextField(
+              controller: _prodController,
               decoration: InputDecoration(
-            border: OutlineInputBorder(),
-            hintText: 'Nombre Producto',
-          )),
+                border: OutlineInputBorder(),
+                hintText: 'Nombre Producto',
+              )),
           const SizedBox(
             height: 40,
           ),
-          const TextField(
+          TextField(
+            controller: _priceController,
             decoration: InputDecoration(
                 border: OutlineInputBorder(), hintText: "Precio"),
+            keyboardType: TextInputType.number,
           ),
           const SizedBox(
             height: 200,
           ),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            child: Text("Añadir"),
-          )
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          print(_prodController.text + ": " + _priceController.text);
+          Navigator.pop(context);
+        },
+        child: Icon(Icons.add),
       ),
     );
   }
