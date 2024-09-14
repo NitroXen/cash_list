@@ -1,5 +1,6 @@
 import 'dart:collection';
 
+import 'package:cash_list/component/component.dart';
 import 'package:cash_list/model/product.dart';
 import 'package:flutter/material.dart';
 
@@ -14,13 +15,6 @@ class _EditScreenState extends State<EditScreen> {
   final TextEditingController _priceController = TextEditingController();
 
   Producto? selectValue;
-
-  List<Producto> menuItems = [
-    Producto(name: "Malboro", price: 25),
-    Producto(name: "Pizza", price: 10),
-    Producto(name: "Chicle", price: 12),
-    Producto(name: "Caramelos", price: 15),
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +39,8 @@ class _EditScreenState extends State<EditScreen> {
                 selectValue = newValue!;
               });
             },
-            items: menuItems.map<DropdownMenuItem<Producto>>((Producto value) {
+            items: Component.items
+                .map<DropdownMenuItem<Producto>>((Producto value) {
               return DropdownMenuItem<Producto>(
                 value: value,
                 child: Text(value.name),

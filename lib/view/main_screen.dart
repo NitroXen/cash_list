@@ -1,3 +1,4 @@
+import 'package:cash_list/component/component.dart';
 import 'package:cash_list/view/routes/router.dart';
 import 'package:flutter/material.dart';
 
@@ -42,16 +43,13 @@ class MainScreen extends StatelessWidget {
           children: [
             TitleCount(style: style),
             Expanded(
-                child: ListView(children: [
-              ListTile(
-                title: Text("Saldo"),
-                subtitle: Text("0 €"),
-              ),
-              ListTile(
-                title: Text("Saldo"),
-                subtitle: Text("0 €"),
-              ),
-            ]))
+                child: ListView.builder(
+                    itemCount: Component.items.length,
+                    itemBuilder: (context, index) {
+                      return ListTile(
+                          title: Text(Component.items[index].name),
+                          subtitle: Text("${Component.items[index].price} €"));
+                    }))
           ],
         ),
       ),
@@ -60,12 +58,15 @@ class MainScreen extends StatelessWidget {
 }
 
 class TitleCount extends StatelessWidget {
-  const TitleCount({
+  TitleCount({
     super.key,
     required this.style,
   });
 
   final TextStyle style;
+
+  final double num =
+      Component.items.map((x) => x.price).reduce((a, b) => a + b).toDouble();
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +82,7 @@ class TitleCount extends StatelessWidget {
             style: style,
           ),
           Text(
-            "0 €",
+            "$num €",
             style: style,
           ),
         ],

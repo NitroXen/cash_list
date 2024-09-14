@@ -1,3 +1,5 @@
+import 'package:cash_list/component/component.dart';
+import 'package:cash_list/model/product.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -13,12 +15,7 @@ class _ShopScreenState extends State<ShopScreen> {
 
   @override
   Widget build(BuildContext context) {
-    List<DropdownMenuEntry<String>> lista = [
-      DropdownMenuEntry(label: "0", value: "hola"),
-      DropdownMenuEntry(label: "1", value: "hola"),
-      DropdownMenuEntry(label: "2", value: "hola"),
-      DropdownMenuEntry(label: "3", value: "hola"),
-    ];
+    Producto? selectValue;
 
     return Scaffold(
       appBar: AppBar(
@@ -34,9 +31,20 @@ class _ShopScreenState extends State<ShopScreen> {
           SizedBox(
             height: 50,
           ),
-          DropdownMenu(
-            dropdownMenuEntries: lista,
-            initialSelection: lista[0].label,
+          DropdownButton(
+            value: selectValue,
+            onChanged: (Producto? newValue) {
+              setState(() {
+                selectValue = newValue!;
+              });
+            },
+            items: Component.items
+                .map<DropdownMenuItem<Producto>>((Producto value) {
+              return DropdownMenuItem<Producto>(
+                value: value,
+                child: Text(value.name),
+              );
+            }).toList(),
           ),
           TextField(
             decoration: InputDecoration(hintText: "Total"),
